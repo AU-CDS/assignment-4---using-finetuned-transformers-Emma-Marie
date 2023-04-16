@@ -2,3 +2,4 @@ transformers
 tensorflow-cpu
 pandas
 random2 # remove before hand in
+matplotlib
