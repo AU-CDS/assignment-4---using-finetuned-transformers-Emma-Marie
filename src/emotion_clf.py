@@ -92,8 +92,7 @@ def main():
     fake_headlines_table = pd.crosstab(index=fake_emotions, columns="Count")
     fake_headlines_table.to_csv("out/fake_headlines_table.csv")
     
-    # creating the bar plot
-    #plot_emotions(emotions, total_emotions)
+    # plot_emotions(emotions, total_emotions)
     names=["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
     values=[emotions.count("anger"),
             emotions.count("disgust"), 
