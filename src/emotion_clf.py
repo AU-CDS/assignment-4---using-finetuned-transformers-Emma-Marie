@@ -66,13 +66,9 @@ def plot_emotions(input_emotions):
             pass
     values = [anger_count, disgust_count, fear_count, joy_count, neutral_count, sadness_count, surprise_count]
     plt.bar(names, values)
-    #str_headline = f"{input_emotion=}".split("_")[0]
-    str_header = f'{input_emotions=}'.split('_')[0]
-    plt.title(f"Distribution of emotions across {str_header} headlines")
+    plt.title(f"Distribution of emotions across headlines")
     plt.xlabel("Emotion")
     plt.ylabel("Count")
-    plt.savefig(f"out/{str_header}_headlines.png",dpi=400)
-    plt.clf() # clearing figure
 
 def main():
     #get headlines
@@ -92,32 +88,17 @@ def main():
     fake_headlines_table = pd.crosstab(index=fake_emotions, columns="Count")
     fake_headlines_table.to_csv("out/fake_headlines_table.csv")
     
-    # plot_emotions(emotions, total_emotions)
-    names=["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
-    values=[emotions.count("anger"),
-            emotions.count("disgust"), 
-            emotions.count("fear"), 
-            emotions.count("joy"), 
-            emotions.count("neutral"), 
-            emotions.count("sadness"),
-            emotions.count("surprise")]
-    plt.bar(names, values)
-    plt.suptitle('Destribution of emotions across all headlines')
-    plt.savefig('out/all_headlines.png',dpi=400)
+    # plot_emotions for all headlines
+    plot_emotions(total_emotions)
+    plt.savefig(f"out/total_headlines_bars.png",dpi=400)
     plt.clf() # clearing figure
     # plot emotions in REAl headlines
     plot_emotions(real_emotions)
+    plt.savefig(f"out/real_headlines_bars.png",dpi=400)
+    plt.clf() 
     # plot emotions in FAKE headlines
     plot_emotions(fake_emotions)
-
-
-    ### Create matrix showin results 
-    #dataframes = []
-    #dataframe = pd.DataFrame(labels, columns=["Headlines", "anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"])
-    #dataframes.append(dataframe)
-    #emotion_data = pd.concat(dataframes)
-    #save dataframe as csv
-    #folderdata.to_csv(f'out/labels.csv', index=False)
+    plt.savefig(f"out/fake_headlines_bars.png",dpi=400)
 
     print(f"Dataframe is saved")
 
