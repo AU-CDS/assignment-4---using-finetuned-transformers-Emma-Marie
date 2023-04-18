@@ -38,7 +38,6 @@ def emotion_clf(headlines, news_data):
     return emotions, total_emotions, real_emotions, fake_emotions
 
 def plot_emotions(input_emotions):
-# plot for REAL headlines
     names=["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
     anger_count = 0
     disgust_count = 0
@@ -73,34 +72,33 @@ def plot_emotions(input_emotions):
 def main():
     #get headlines
     headlines, news_data = get_data()
-    print("Headlines ready!")
     # predict emotions in headlines
     emotions, total_emotions, real_emotions, fake_emotions = emotion_clf(headlines, news_data)
-    print("Emotions for headlines predicted")
 
     # create and save table for emotions across all headlines
     all_headlines_table = pd.crosstab(index=total_emotions, columns="Count")
     all_headlines_table.to_csv("out/all_headlines_table.csv")
-    # create and save table for emotions across REAL headlines
+    # table for emotions across REAL headlines
     real_headlines_table = pd.crosstab(index=real_emotions, columns="Count")
     real_headlines_table.to_csv("out/real_headlines_table.csv")
-    # create and save table for emotions across FAKE headlines
+    # table for emotions across FAKE headlines
     fake_headlines_table = pd.crosstab(index=fake_emotions, columns="Count")
     fake_headlines_table.to_csv("out/fake_headlines_table.csv")
     
     # plot_emotions for all headlines
     plot_emotions(total_emotions)
+    plt.title(f"Distribution of emotions total headlines")
     plt.savefig(f"out/total_headlines_bars.png",dpi=400)
-    plt.clf() # clearing figure
-    # plot emotions in REAl headlines
+    plt.clf() # clear figure
+    # plot for REAl headlines
     plot_emotions(real_emotions)
+    plt.title(f"Distribution of emotions real headlines")
     plt.savefig(f"out/real_headlines_bars.png",dpi=400)
-    plt.clf() 
-    # plot emotions in FAKE headlines
+    plt.clf() # clear figure
+    # plot for FAKE headlines
     plot_emotions(fake_emotions)
+    plt.title(f"Distribution of emotions fake headlines")
     plt.savefig(f"out/fake_headlines_bars.png",dpi=400)
-
-    print(f"Dataframe is saved")
 
 if __name__ == "__main__":
     main()
