@@ -2,7 +2,6 @@ import os
 import pandas as pd
 # import pipelines
 from transformers import pipeline
-import random2 as rd
 import matplotlib.pyplot as plt
 
 def get_data():
