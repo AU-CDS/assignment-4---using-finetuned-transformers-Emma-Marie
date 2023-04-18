@@ -2,22 +2,36 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10838296&assignment_repo_type=AssignmentRepo)
 # Assignment 4 - Using finetuned transformers via HuggingFace
 
-In previous assignments, you've done a lot of model training of various kinds of complexity, such as training document classifiers or RNN language models. This assignment is more like Assignment 1, in that it's about *feature extraction*.
+## Purpose
+In this assignment, I will use HuggingFace to do feature extraction from the ```Fake or Real News``` dataset. I use the ```Emotion English DistilRoBERTa-base```model to classify the emotions in the news headlines in the data set. The model predicts six basic emotions and one neutral emotion. The emotions are: anger, disgust, fear, joy, neutral, sadness, and surprise. The results are displaied in three tables and three bar plots,  which can be found in the ```out``` folder.
 
-For this assignment, you should use ```HuggingFace``` to extract information from the *Fake or Real News* dataset that we've worked with previously.
+Further documentation for the model from HuggingFace can be found here: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base 
 
-You should write code and documentation which addresses the following tasks:
+## Scripts
+This project contains one script called ```emotion_clf```, which can be found in the ```src```folder. The script trains the emotion classifier on the headlines from the Fake or Real News data set. The script consists of the following parts:
 
-- Initalize a ```HuggingFace``` pipeline for emotion classification
-- Perform emotion classification for every *headline* in the data
-- Assuming the most likely prediction is the correct label, create tables and visualisations which show the following:
-  - Distribution of emotions across all of the data
-  - Distribution of emotions across *only* the real news
-  - Distribution of emotions across *only* the fake news
-- Comparing the results, discuss if there are any key differences between the two sets of headlines
+Functions: 
+- __get_data()__ loads in the data and extracts the news headlines. 
+- __emotion_clf()__ loads the emotionclassifier model, runs the classifier on the headlines, and create three data frames containing the distribution of emotions across three categories: 1) _all_ headlines, 2) headlines from _real_ news, 3) headlines from _fake_ news.
+- __plot_emotions()__ counts in how many headlines each emotion occurs, and creates a bar chart showing the desctribution of emotions. Is run on each of the three data frames creates in the emotion_clf(). 
+- __main()__ runs the three functions above. Furthermore, it  creates three tables each for each of the three categories (all headlines, real headlines, fake headlines) to display the results. The tables show the desctribution of emotions across the headlines in the given category.
 
 
-## Tips
-- I recommend using ```j-hartmann/emotion-english-distilroberta-base``` like we used in class.
-- Spend some time thinking about how best to present you results, and how to make your visualisations appealing and readable.
-- **MAKE SURE TO UPDATE YOUR README APPROPRIATELY!**
+## Data
+The data is used to train the model in this assignemtn is called```Fake or Real News```. The data can be found in the ```in```folder, but is originally from Kaggle. The data consists of a lot of different news articles of which half os _fake news_ and the other half is _real news_. The data set is an array with three columns: "title", "text", and "label". For this assignment, I'm only interested in the titles and their label (REAL or FAKE). 
+
+The data can be accessed and download (12 MB) here: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news. Note that the data has the additional column "number" (compared to the version in the "in" folder) when downloaded from Kaggle. 
+
+## How to run the scripts
+Run the emotion_clf.py:
+- run "bash setup.sh" from the commandline to create a virtual environment and install the required packages.
+- run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment.
+
+## Discussing of the results
+
+DISCUSS :))
+
+## References
+Fake or Real News, Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news 
+
+Jochen Hartmann, "Emotion English DistilRoBERTa-base". https://huggingface.co/j-hartmann/emotion-english-distilroberta-base/, 2022.
