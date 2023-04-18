@@ -29,7 +29,9 @@ Run the emotion_clf.py:
 
 ## Discussing of the results
 
-DISCUSS :))
+The majority of the headlines in the total data set are neutral. The second most common emotion is fear, and the third is anger. Sadness is number four and only occurs 53 times more than disgust. Suprise is number six and joy is number seven. This means, that negative emotions dominates the corpus of news articles. Only 363 of the 6335 headlines predicted by the model belongs to one of the two possitive emitions _joy_ and _surprise_. 
+
+The destribution of emotions across the real headlines and the fake headlines looks very similar. They also show the same tendency as all the headlines combined: most headlines are neutral, and least express joy or surprise. Disgust and sadness occur almost equally often. I expected the proportion of negative emotions among fake news headlines to be bigger than the proportion of negative emotions among real news headlines, because I was under the (not accademically substantiated) impression, that fake news are often used to spread negative rumours about other people or events. But according to this model, the negative emotions are not special character traits for fake news. 
 
 ## References
 Fake or Real News, Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news 

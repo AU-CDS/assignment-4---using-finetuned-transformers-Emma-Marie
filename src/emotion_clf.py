@@ -85,7 +85,7 @@ def main():
     # plot_emotions for all headlines
     plot_emotions(total_emotions)
     plt.title(f"Distribution of emotions across all headlines")
-    plt.savefig(f"out/total_headlines_bars.png",dpi=400)
+    plt.savefig(f"out/all_headlines_bars.png",dpi=400)
     plt.clf() # clear figure
     # plot for REAl headlines
     plot_emotions(real_emotions)
