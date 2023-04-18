@@ -35,10 +35,9 @@ def emotion_clf(headlines, news_data):
     fake_news_mask = news_data["label"]=="FAKE"
     fake_emotions = total_emotions.loc[fake_news_mask].reset_index(drop=True).rename("Emotion")
 
-    return emotions, total_emotions, real_emotions, fake_emotions
+    return total_emotions, real_emotions, fake_emotions
 
 def plot_emotions(input_emotions):
-# plot for REAL headlines
     names=["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
     anger_count = 0
     disgust_count = 0
@@ -66,17 +65,14 @@ def plot_emotions(input_emotions):
             pass
     values = [anger_count, disgust_count, fear_count, joy_count, neutral_count, sadness_count, surprise_count]
     plt.bar(names, values)
-    plt.title(f"Distribution of emotions across headlines")
     plt.xlabel("Emotion")
     plt.ylabel("Count")
 
 def main():
     #get headlines
     headlines, news_data = get_data()
-    print("Headlines ready!")
     # predict emotions in headlines
-    emotions, total_emotions, real_emotions, fake_emotions = emotion_clf(headlines, news_data)
-    print("Emotions for headlines predicted")
+    total_emotions, real_emotions, fake_emotions = emotion_clf(headlines, news_data)
 
     # create and save table for emotions across all headlines
     all_headlines_table = pd.crosstab(index=total_emotions, columns="Count")
@@ -90,17 +86,18 @@ def main():
     
     # plot_emotions for all headlines
     plot_emotions(total_emotions)
+    plt.title(f"Distribution of emotions across all headlines")
     plt.savefig(f"out/total_headlines_bars.png",dpi=400)
     plt.clf() # clearing figure
     # plot emotions in REAl headlines
     plot_emotions(real_emotions)
+    plt.title(f"Distribution of emotions across real headlines")
     plt.savefig(f"out/real_headlines_bars.png",dpi=400)
     plt.clf() 
     # plot emotions in FAKE headlines
     plot_emotions(fake_emotions)
+    plt.title(f"Distribution of emotions across fake headlines")
     plt.savefig(f"out/fake_headlines_bars.png",dpi=400)
-
-    print(f"Dataframe is saved")
 
 if __name__ == "__main__":
     main()
