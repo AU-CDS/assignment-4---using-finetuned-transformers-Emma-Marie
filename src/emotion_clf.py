@@ -10,8 +10,6 @@ def get_data():
     data_path = os.path.join("in","fake_or_real_news.csv")
     # load data
     news_data = pd.read_csv(data_path, index_col=0) 
-    #sampling random data--> REMOVE BEFORE HAND IN
-    news_data = news_data.sample(n=100)
     # create list of only the headlines
     headlines = news_data["title"]
 
