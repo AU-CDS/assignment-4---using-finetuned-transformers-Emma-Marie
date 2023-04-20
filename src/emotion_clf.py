@@ -83,18 +83,18 @@ def main():
     
     # plot_emotions for all headlines
     plot_emotions(total_emotions)
-    plt.title(f"Distribution of emotions across all headlines")
-    plt.savefig(f"out/all_headlines_bars.png",dpi=400)
+    plt.title("Distribution of emotions across all headlines")
+    plt.savefig("out/all_headlines_bars.png",dpi=400)
     plt.clf() # clear figure
     # plot for REAl headlines
     plot_emotions(real_emotions)
-    plt.title(f"Distribution of emotions across real headlines")
-    plt.savefig(f"out/real_headlines_bars.png",dpi=400)
+    plt.title("Distribution of emotions across real headlines")
+    plt.savefig("out/real_headlines_bars.png",dpi=400)
     plt.clf() # clear figure
     # plot for FAKE headlines
     plot_emotions(fake_emotions)
-    plt.title(f"Distribution of emotions across fake headlines")
-    plt.savefig(f"out/fake_headlines_bars.png",dpi=400)
+    plt.title("Distribution of emotions across fake headlines")
+    plt.savefig("out/fake_headlines_bars.png",dpi=400)
 
 if __name__ == "__main__":
     main()
