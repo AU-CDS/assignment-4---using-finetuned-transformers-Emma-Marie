@@ -25,7 +25,12 @@ The data can be accessed and download (12 MB) here: https://www.kaggle.com/datas
 ## How to run the scripts
 Run the emotion_clf.py:
 - run "bash setup.sh" from the commandline to create a virtual environment and install the required packages.
+
+            bash setup.sh
+
 - run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment.
+
+            bash run.sh
 
 ## Discussing of the results
 
