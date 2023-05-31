@@ -2,47 +2,41 @@
 [![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=10838296&assignment_repo_type=AssignmentRepo)
 # Assignment 4 - Using finetuned transformers via HuggingFace
 
-## Description and purpose
-In this assignment, I will use HuggingFace to do feature extraction from the ```Fake or Real News``` dataset. I use the ```Emotion English DistilRoBERTa-base```model to classify the emotions in the news headlines in the data set. The model predicts six basic emotions and one neutral emotion. The emotions are: anger, disgust, fear, joy, neutral, sadness, and surprise. The results are displaied in three tables and three bar plots,  which can be found in the ```out``` folder.
+## 1. Contribution
+I have developed the code for this assignment without other contributors.
 
-Further documentation for the model from HuggingFace can be found here: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base 
+## 2. Description
+In this assignment, I will use ```HuggingFace``` to do feature extraction from the ```Fake or Real News``` dataset. I use the ```Emotion English DistilRoBERTa-base``` model to classify the emotions in the news headlines in the data set. The model predicts six basic emotions and one neutral emotion. The emotions are anger, disgust, fear, joy, neutral, sadness, and surprise. The results are displayed in the three tables and the three bar plots, which can be found in the ```out``` folder. Further documentation of the model from HuggingFace can be found here: https://huggingface.co/j-hartmann/emotion-english-distilroberta-base. 
 
-## Data
-The data is used to train the model in this assignemtn is called```Fake or Real News```. The data can be found in the ```in```folder, but is originally from Kaggle. The data consists of a lot of different news articles of which half os _fake news_ and the other half is _real news_. The data set is an array with three columns: "title", "text", and "label". For this assignment, I'm only interested in the titles and their label (REAL or FAKE). 
+## 3. Methods
+This assignment consists of one script called ```emotions_clf.py``` which is in the ```src``` folder. The data is loaded and the hews headlines are extracted. The emotion classifier model is loaded and run on the headlines. The output is three data frames showing the distribution of emotions across three categories: *all* headlines, headlines from *real* news, and headlines from *fake* news. For each of the three categories of news headlines, the number of headlines showing each emotion are counted, and the results are shown in a bar chart for each category. Chards and data frames are saved in the ```out``` folder.
 
-The data can be accessed and download (12 MB) here: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news. Note that the data has the additional column "number" (compared to the version in the "in" folder) when downloaded from Kaggle. 
+## 4. Data
+The data for this assignment is called Fake or Real News. The data consists of a lot of different newspaper articles of which half is fake news and the other half is real news. The data set is an array with three columns: “title”, “text”, and “label”. For this assignment, I’m only interested in the titles and their labels. The two labels are “FAKE” and “REAL”. 
 
-## Scripts
-This project contains one script called ```emotion_clf```, which can be found in the ```src```folder. The script trains the emotion classifier on the headlines from the Fake or Real News data set. The script consists of the following parts:
-- __get_data()__ loads in the data and extracts the news headlines. 
-- __emotion_clf()__ loads the emotionclassifier model, runs the classifier on the headlines, and create three data frames containing the distribution of emotions across three categories: 1) _all_ headlines, 2) headlines from _real_ news, 3) headlines from _fake_ news.
-- __plot_emotions()__ counts in how many headlines each emotion occurs, and creates a bar chart showing the desctribution of emotions. Is run on each of the three data frames creates in the emotion_clf(). 
-- __main()__ runs the three functions above. Furthermore, it  creates three tables each for each of the three categories (all headlines, real headlines, fake headlines) to display the results. The tables show the desctribution of emotions across the headlines in the given category.
+### 4.1 Get the data
+The data can be found in the ```in``` folder. If needed, it can also be downloaded (12 MB) from Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news. Note that the data has the additional column “number” when downloaded from Kaggle, and this column is not part of the version of the dataset provided by my teacher Ross, which is in the one in the GitHub repository.
 
+## 5. Usage
+### 5.1 Prerequisites
+For the scripts to run properly, please install Python 3 and Bash. The code for this assignment is created and tested using the app “Coder Python 1.73.1” on Ucloud.sdu.dk. The final step it to clone the GitHub repository on your own device.
 
-## How to run the scripts
-
-### Prerequisites
-For the code to run, you must have Bash and Python 3 installed. I created and tested the code using the app "Coder Python 1.73.1" on Ucloud.sdu.dk. 
-
-### Running the scripts
-Run the emotion_clf.py:
-- run "bash setup.sh" from the commandline to create a virtual environment and install the required packages.
+### 5.2 Install packages
+Run the command “bash setup.sh” from the command line to create a virtual environment and install the required packages:
 
             bash setup.sh
 
-- run "bash run.sh" from the commandline to activate the virtual environment, run the code, and deactivate the environment.
+### 5.3 Run the scripts
+To run emotion_clf.py, run the command “bash run.sh” from the command line. This activates the virtual environment, run the script, and deactivates the environment.
 
             bash run.sh
 
-## Discussing of the results
+## 6. Discussing of the results
 
-The majority of the headlines in the total data set are neutral. The second most common emotion is fear, and the third is anger. Sadness is number four and only occurs 53 times more than disgust. Suprise is number six and joy is number seven. This means, that negative emotions dominate the total corpus of news articles. Only 363 of the 6335 headlines belongs to one of the two possitive emitions _joy_ and _surprise_. 
+Most of the headlines in the total data set are *neutral*. The second most common emotion is *fear*, and the third is *anger*. *Sadness* is number four and it only occurs 53 times more than *disgust*. *Surprise* is number six and *joy* is number seven. So negative emotions dominate the total corpus of news articles. Only 363 of the 6335 headlines belongs to one of the two positive emotions joy and surprise. It has to be noted, that *surprise* is an ambiguous word that can both mean something positive and negative. 
+	The distribution of emotions across the real headlines and the fake headlines shows the same tendency as the complete dataset: most headlines are *neutral*, and only few express *joy* or *surprise*. I expected the proportion of negative emotions among fake news headlines to be bigger than among real news headlines, because I was under the impression, that fake news is mostly used to spread negative rumors about other people and events, but according to this model, the negative emotions are not a special character trait for fake news. 
 
-The destribution of emotions across the real headlines and the fake headlines looks very similar. They also show the same tendencies as data set of all the headlines: most headlines are neutral, and only few express joy or surprise. 
-I expected the proportion of negative emotions among fake news headlines to be bigger than the proportion of negative emotions among real news headlines, because I was under the (not accademically substantiated) impression, that fake news are often used to spread negative rumours about other people or events. But according to this model, the negative emotions are not a special character trait for fake news. 
-
-## References
+## 7. References
 Fake or Real News, Kaggle: https://www.kaggle.com/datasets/jillanisofttech/fake-or-real-news 
 
 Jochen Hartmann, "Emotion English DistilRoBERTa-base". https://huggingface.co/j-hartmann/emotion-english-distilroberta-base/, 2022.
