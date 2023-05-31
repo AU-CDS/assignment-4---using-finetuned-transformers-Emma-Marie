@@ -4,6 +4,7 @@ import pandas as pd
 from transformers import pipeline
 import matplotlib.pyplot as plt
 
+# path to "Fake or Real News" dataset
 path_fake_real_news = os.path.join("in","fake_or_real_news.csv")
 
 def get_data(data_path):
@@ -37,19 +38,28 @@ def emotion_clf(headlines, news_data):
     return total_emotions, real_emotions, fake_emotions
 
 def emotion_table(input_emotions, cathegory_name):
+    # create table showin destribution of emotions in a category (real, fake or total respectively)
     input_emotion_table = pd.crosstab(index=input_emotions, columns="Count")
+    # set outpath and name of table
     table_outpath = os.path.join("out", f"{cathegory_name}_table.csv")
+    # save table as csv
     input_emotion_table.to_csv(table_outpath)
     print("Emotion tables are saved")
 
 def save_plot(category_name):
+    # set plot title
     plt.title(f"Distribution of emotions across {category_name}")
+    # set outpath and name of plot
     outpath = os.path.join("out", f"{category_name}_bars.png")
+    # save plot
     plt.savefig(outpath, dpi=400)
-    plt.clf() # clear figure
+    # clear figure
+    plt.clf() 
 
 def plot_emotions(input_emotions, category_name):
+    # define names of the seven emotions
     names=["anger", "disgust", "fear", "joy", "neutral", "sadness", "surprise"]
+    # define emotions conters
     anger_count = 0
     disgust_count = 0
     fear_count = 0
@@ -57,6 +67,7 @@ def plot_emotions(input_emotions, category_name):
     neutral_count = 0
     sadness_count = 0
     surprise_count = 0
+    # loop for counting each emotion type
     for emotion in input_emotions:
         if emotion == "anger":
             anger_count+=1
@@ -74,10 +85,13 @@ def plot_emotions(input_emotions, category_name):
             surprise_count+=1
         else: 
             pass
+    # add all emotion counts to a list
     values = [anger_count, disgust_count, fear_count, joy_count, neutral_count, sadness_count, surprise_count]
-    # plot the values
+    # plot the values of the list
     plt.bar(names, values)
+    # name of x-axis
     plt.xlabel("Emotion")
+    # name of y-axis
     plt.ylabel("Count")
     # save bar plot
     save_plot(category_name)
